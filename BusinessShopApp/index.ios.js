@@ -9,23 +9,41 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
+  NativeModules
 } from 'react-native';
+import Navigation from './Navigation/navigation'
+import navigation from './Navigation/app'
 
-export default class BusinessShopApp extends Component {
+class Testing extends Component{
   render() {
     return (
+
+      <View style={{backgroundColor:'red',flex:1}}>
+      <Navigation />
+      </View>
+      );
+  }
+}
+
+export default class BusinessShopApp extends Component {
+	
+	_toast() {
+        // showMessage('提示信息内容','显示时长1~5秒','位置['top','center','bottom']')
+        var CalendarManager = NativeModules.CalendarManager;
+CalendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey');
+    }
+  render() {
+  	
+    return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+     <TouchableOpacity onPress={ this._toast.bind(this) }>
+                    <View>
+                        <Text>点击图片可以去图文详情页</Text>
+                    </View>
+                    <Testing />
+                </TouchableOpacity>
       </View>
     );
   }
@@ -50,4 +68,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('BusinessShopApp', () => BusinessShopApp);
+AppRegistry.registerComponent('BusinessShopApp', () => navigation);
